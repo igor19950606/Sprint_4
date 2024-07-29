@@ -1,20 +1,19 @@
-package PageObject;
+package ru.praktikum.qa_scooter.page_object;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import static org.junit.Assert.assertEquals;
 
 //Главная страница
-public class MainPage {
+public class MainPage  {
 
     public static WebDriver driver;
 
     public MainPage(WebDriver driver) {
         this.driver = driver;
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
     private final By cookieButton = By.id("rcc-confirm-button");// Локатор кнопки "да все привыкли" сообщения куки
@@ -71,22 +70,16 @@ public class MainPage {
 
     // Клик по стрелке выпадающего списка
     public static void clickQuestionArrow(int questionNumber) {
-        new WebDriverWait(driver, Duration.ofSeconds(300))
-                .until(ExpectedConditions.elementToBeClickable(By.id(dropDownQuestionsArray[questionNumber])));
         driver.findElement(By.id(dropDownQuestionsArray[questionNumber])).click();
     }
 
     // Проверка текста в открытой панели
     public static void checkTextInOpenPanel(String expectedText, int answerNumber) {
-        new WebDriverWait(driver, Duration.ofSeconds(300))
-                .until(ExpectedConditions.visibilityOfElementLocated(By.id(dropDownAnswersArray[answerNumber])));
         String answerText = driver.findElement(By.id(dropDownAnswersArray[answerNumber])).getText();
         assertEquals(expectedText, answerText);
     }
     // Клик по кнопке вопроса
     public MainPage clickQuestionButton(String questionButtonLocator) {
-        new WebDriverWait(driver, Duration.ofSeconds(300))
-                .until(ExpectedConditions.elementToBeClickable(By.id(questionButtonLocator)));
         driver.findElement(By.id(questionButtonLocator)).click();
         return this;
     }

@@ -1,4 +1,4 @@
-package PageObject;
+package ru.praktikum.qa_scooter.page_object;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;

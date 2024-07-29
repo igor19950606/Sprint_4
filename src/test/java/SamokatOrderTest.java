@@ -1,25 +1,16 @@
-
-import PageObject.AboutRentPage;
-import PageObject.MainPage;
-import PageObject.OrderPage;
-import org.junit.After;
+import ru.praktikum.qa_scooter.page_object.AboutRentPage;
+import ru.praktikum.qa_scooter.page_object.MainPage;
+import ru.praktikum.qa_scooter.page_object.OrderPage;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
-import static PageObject.MainPage.driver;
 import static org.junit.Assert.assertTrue;
 
-public class SamokatOrderTest {
+public class SamokatOrderTest extends BaseTest {
 
    // Тест через кнопку заказа
     @Test
     public void samokatOrderingByHeaderOrderButton() {
-        WebDriver driver = new ChromeDriver();
-        //WebDriver driver = new EdgeDriver();
-        driver.get("https://qa-scooter.praktikum-services.ru/");
         new MainPage(driver)
-                .clickCookieButton()
                 .clickHeaderOrderButton();
 
         new OrderPage(driver)
@@ -40,19 +31,11 @@ public class SamokatOrderTest {
                 .isModalOrderWindowDisplayed();
         assertTrue("Отсутствует окно заказа тест1", isDisplayed);
     }
-    @After
-    public void teardown() {
-        driver.quit();
-    }
 
     // Тест через кнопку заказа в середине сайта
     @Test
     public void samokatOrderingByMiddleOrderButton() {
-        WebDriver driver = new ChromeDriver();
-        //WebDriver driver = new EdgeDriver();
-        driver.get("https://qa-scooter.praktikum-services.ru/");
         new MainPage(driver)
-                .clickCookieButton()
                 .clickMiddleOrderButton();
 
         new OrderPage(driver)
@@ -72,7 +55,6 @@ public class SamokatOrderTest {
                 .clickOrderButtonYes()
                 .isModalOrderWindowDisplayed();
         assertTrue("Отсутствует окно заказа тест2", isDisplayed);
-        driver.quit();
     }
 
 }
